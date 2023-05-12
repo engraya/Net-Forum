@@ -1,0 +1,72 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static '/styles/main.css' %}" type="text/css">
+  <main class="profile-page layout layout--3">
+    <div class="container">
+      <!-- Topics Start -->
+      {% include 'base/topics_component.html' %}
+      <!-- Topics End -->
+
+      <!-- Room List Start -->
+      <div class="roomList">
+        <div class="profile">
+          <div class="profile__avatar">
+            <div class="avatar avatar--large active">
+              <img src="{{user.avatar.url}}" />
+            </div>
+          </div>
+          <div class="profile__info">
+            <h3>{{user.username}}</h3>
+            <p>@{{user.username}}</p>
+            {% if request.user == user %}
+            <a href="{% url 'update-user' %}" class="btn btn--main btn--pill">Edit Profile</a>
+            {% endif %}
+          </div>
+          <div class="profile__about">
+            <h3>About User</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur illo tenetur
+              facilis sunt nemo debitis quisquam hic atque aut? Ducimus alias placeat optio
+              accusamus repudiandae quis ab ex exercitationem rem?
+            </p>
+            <h3>Country: </h3>{{user.country.name}}
+            <h3>Profession : </h3>{{user.profession}}
+            <h3>Date of Birth : </h3>{{user.dateOfBirth}}
+            <h3>Gender : </h3>{{user.gender}}
+          </div>
+          <hr>
+         
+            <center>
+              <ul class="social-links">
+                <li><img class="social" src="{% static 'images/twitter.png' %}"></li>
+                <li><img class="social" src="{% static 'images/instagram-new.png' %}"></li>
+                <li><img class="social" src="{% static 'images/github.png' %}"></li>
+                <li><img class="social" src="{% static 'images/facebook-new.png' %}"></li>
+                <li><img class="social" src="{% static 'images/whatsapp--v3.png' %}"></li>
+                <li><img class="social" src="{% static 'images/linkedin-2.png' %}"></li>
+            </ul>
+
+            </center>
+      
+        </div>
+
+        <div class="roomList__header">
+          <div>
+            <h2>Rooms Hosted by {{user.username}}</h2>
+          </div>
+        </div>
+        {% include 'base/feeds_component.html' %}
+      </div>
+
+      <!-- Room List End -->
+
+      <!-- Activities Start -->
+      {% include 'base/activity_component.html' %}
+      <!-- Activities End -->
+    </div>
+  </main>
+{% endblock content %}
